@@ -10,4 +10,4 @@ def map_WWB_to_WSM(WWB_device):
 
 def map_WSM_to_WWB(WSM_device):
     WSM_to_WWB = {"EM500G3": "EW 500 G3", "SR-IEMG4": "EW 300 IEM G3"}
-    return Wsm_to_WWB[WSM_device]
+    return WSM_to_WWB[WSM_device]

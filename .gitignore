@@ -132,4 +132,4 @@ dmypy.json
 .idea/
 
 # Development data
-.dev_data/
+dev_data/

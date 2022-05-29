@@ -27,7 +27,7 @@ def parse_WWB_frequencies(WWB_xml_root):
 
     print(frequencies)
 
-    return
+    return frequencies
 
 
 if __name__ == "__main__":

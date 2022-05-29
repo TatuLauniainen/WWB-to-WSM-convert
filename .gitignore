@@ -133,3 +133,4 @@ dmypy.json
 
 # Development data
 dev_data/
+.DS_Store

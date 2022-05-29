@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-import filemanager
+import modules.filemanager as filemanager
 
 
 def parse_WWB_frequencies(WWB_xml_root):

@@ -1,6 +1,6 @@
 from datetime import datetime
 import xml.etree.ElementTree as ET
-import parser, devicemap
+import modules.parser as parser, modules.devicemap as devicemap
 
 
 def read_WWB_data(WWB_path):

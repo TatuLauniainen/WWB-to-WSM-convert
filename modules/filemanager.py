@@ -1,5 +1,6 @@
 from datetime import datetime
 import xml.etree.ElementTree as ET
+import parser, devicemap
 
 
 def read_WWB_data(WWB_path):
@@ -20,43 +21,46 @@ def read_WWB_data(WWB_path):
     return WWB_xml_root
 
 
-def write_WSM_data(WSM_path, WSM_data):
+def write_WSM_data(WSM_path, wsm_folder, frequencies):
     """
 
     Write data to WSM file
 
     Parameters:
     WSM_path (str): path to WSM file
-    WSM_data (str): data writable to WSM file
+    frequencies (Dict): data writable to WSM file
 
     """
 
-    now = datetime.datetime.now()
+    tree = ET.parse(WSM_path)
+    WSM_xml_root = tree.getroot()
+
+    for device in WSM_xml_root.iter("Device"):
+        type = device.get("Type")
+        WWB_type = devicemap.map_WSM_to_WWB(type)
+
+        for receiver in device.iter("Receiver"):
+            if not len(frequencies[WWB_type]):
+                frequency = 0
+            else:
+                frequency = frequencies[WWB_type].pop(0)
+            receiver.find("CurrentFrequency").text = frequency
+
+    now = datetime.now()
     date = now.strftime("%Y%m%d-%H%M")
 
-    frequencies = [
-        "536125",
-        "577875",
-    ]  # Later these frequencies will be read from the WWB inventory report
+    tree.write(wsm_folder + str(date) + ".wsm")
 
-    with open(
-        f"{date}_frequencies.csv", "w"
-    ) as file:  # Find a good folder to save this file to
-        file.write(
-            "name;type;frequency;tolerance;minfrequency;maxfrequency;priority;squelchlevel\n"
-        )
-        i = 1
-        for frequency in frequencies:
-            file.write(
-                f"Frequency {str(i).zfill(3)};2;{frequency};0;{frequency};{frequency};2;5\n"
-            )
-            i += 1
     return
 
 
 if __name__ == "__main__":
     # frequencies = ["536125", "577875"]
     # write_WSM_data(frequencies)
-    read_WWB_data(
-        "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/20220528.inv"
+    WWB_xml_root = read_WWB_data(
+        "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/20220529.inv"
     )
+    frequencies = parser.parse_WWB_frequencies(WWB_xml_root)
+    wsm_path = "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/20220529.wsm"
+    wsm_folder = "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/"
+    write_WSM_data(wsm_path, wsm_folder, frequencies)

@@ -12,11 +12,12 @@ class GUI:
 
         self.__open_WSM_button = Button(self.__mainwindow, text="Select WSM template", command=self.open_WSM)
         self.__open_WWB_button = Button(self.__mainwindow, text="Select WWB inventory", command=self.open_WWB)
-        self.__convert_button = Button(self.__mainwindow, text="Convert frequencies", command=self.convert)
+        self.__convert_button = Button(self.__mainwindow, text="Convert frequencies", command=self.convert,
+                                       bg="#44e359", fg="black")
 
-        self.__open_WSM_button.pack()
-        self.__open_WWB_button.pack()
-        self.__convert_button.pack()
+        self.__open_WSM_button.grid(row=0, column=0)
+        self.__open_WWB_button.grid(row=1, column=0)
+        self.__convert_button.grid(row=2, column=0)
 
         self.__mainwindow.mainloop()
 

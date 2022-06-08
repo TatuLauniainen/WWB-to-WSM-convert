@@ -9,7 +9,7 @@ def main(WWB_path, WSM_path, WSM_folder):
 
 
 if __name__ == "__main__":
-    WWB_path = "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/20220529.inv"
-    WSM_path = "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/20220529.wsm"
+    WWB_path = "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/20220608.inv"
+    WSM_path = "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/20220608.wsm"
     WSM_folder = "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/"
     main(WWB_path, WSM_path, WSM_folder)

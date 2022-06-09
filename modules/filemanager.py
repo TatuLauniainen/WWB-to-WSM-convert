@@ -37,7 +37,11 @@ def write_WSM_data(WSM_path, wsm_folder, frequencies):
 
     for device in WSM_xml_root.iter("Device"):
         type = device.get("Type")
-        WWB_type = devicemap.map_WSM_to_WWB(type)
+        print(type)
+        try:
+            WWB_type = devicemap.map_WSM_to_WWB(type)
+        except KeyError:
+            continue
 
         for receiver in device.iter("Receiver"):
             if not len(frequencies[WWB_type]):

@@ -41,8 +41,7 @@ class GUI:
 
     def open_WSM(self):
         """
-        Creates an Open dialog and returns the selected filename
-        :return: str, selected filename
+        Creates an Open dialog and updates the self.__WSM_path variable with the selected filepath
         """
         self.__WSM_path = filedialog.askopenfilename(parent=self.__mainwindow, title="Select WSM file...",
                                                      initialfile="/Users/pvvmsktekniikka/Desktop/20220528_testi.wsm",
@@ -52,8 +51,7 @@ class GUI:
 
     def open_WWB(self):
         """
-        Creates an Open dialog and returns the selected filename
-        :return: str, selected filename
+        Creates an Open dialog and updates the self.__WWB_path with the selected filepath
         """
         self.__WWB_path = filedialog.askopenfilename(parent=self.__mainwindow, title="Select WWB file...",
                                                      initialdir="~/Documents/Shure/Inventory/",

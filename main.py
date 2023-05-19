@@ -1,7 +1,7 @@
-import modules.filemanager as filemanager, modules.parser as parser, modules.gui as gui
+import modules.filemanager as filemanager, modules.parser as parser, modules.gui as gui, modules.paths as paths
 
 
-def main(WWB_path, WSM_path, WSM_folder="/Users/pvvmsktekniikka/Desktop/"):
+def main(WWB_path, WSM_path, WSM_folder=paths.WSM_FOLDER_PATH):
 
     print(WWB_path, WSM_path, WSM_folder)
 
@@ -11,7 +11,4 @@ def main(WWB_path, WSM_path, WSM_folder="/Users/pvvmsktekniikka/Desktop/"):
 
 
 if __name__ == "__main__":
-    # WWB_path = "/Users/pvvmsktekniikka/Desktop/New Inventory.inv"
-    # WSM_path = "/Users/pvvmsktekniikka/Desktop/20220528_testi.wsm"
-    # WSM_folder = "/Users/pvvmsktekniikka/Documents/VSCode/WWB-to-WSM-convert/dev_data/"
     converter_gui = gui.GUI()

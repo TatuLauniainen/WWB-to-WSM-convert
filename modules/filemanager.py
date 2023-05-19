@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 import modules.parser as parser, modules.devicemap as devicemap
 
 
-def read_WWB_data(WWB_path):
+def read_WWB_data(WWB_file_path):
     """
 
     Read data from WWB file
@@ -16,23 +16,23 @@ def read_WWB_data(WWB_path):
 
     """
 
-    tree = ET.parse(WWB_path)
+    tree = ET.parse(WWB_file_path)
     WWB_xml_root = tree.getroot()
     return WWB_xml_root
 
 
-def write_WSM_data(WSM_path, wsm_folder, frequencies):
+def write_WSM_data(WSM_file_path, WSM_folder_path, frequencies):
     """
 
     Write data to WSM file
 
     Parameters:
-    WSM_path (str): path to WSM file
+    WSM_file_path (str): path to WSM file
     frequencies (Dict): data writable to WSM file
 
     """
 
-    tree = ET.parse(WSM_path)
+    tree = ET.parse(WSM_file_path)
     WSM_xml_root = tree.getroot()
 
     for device in WSM_xml_root.iter("Device"):
@@ -51,9 +51,10 @@ def write_WSM_data(WSM_path, wsm_folder, frequencies):
             receiver.find("CurrentFrequency").text = frequency
 
     now = datetime.now()
-    date = now.strftime("%Y%m%d-%H%M")
+    date = now.strftime("%Y%m%d-%H%M%S")
 
-    tree.write(wsm_folder + str(date) + ".wsm")
+    output_file_path = WSM_folder_path + str(date) + "_convert" + ".wsm"
+    tree.write(output_file_path)
 
     return
 

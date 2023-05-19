@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import filedialog
+from tkinter import messagebox
 
+from modules.paths import *
 import main
 
 
@@ -44,7 +46,7 @@ class GUI:
         Creates an Open dialog and updates the self.__WSM_path variable with the selected filepath
         """
         self.__WSM_path = filedialog.askopenfilename(parent=self.__mainwindow, title="Select WSM file...",
-                                                     initialfile="/Users/pvvmsktekniikka/Desktop/20220528_testi.wsm",
+                                                     initialdir=WSM_FOLDER_PATH,
                                                      filetypes=[("WSM files", "*.wsm")])
 
         self.__chosen_WSM.configure(text=f"Selected file: {self.__WSM_path}")
@@ -54,10 +56,14 @@ class GUI:
         Creates an Open dialog and updates the self.__WWB_path with the selected filepath
         """
         self.__WWB_path = filedialog.askopenfilename(parent=self.__mainwindow, title="Select WWB file...",
-                                                     initialdir="~/Documents/Shure/Inventory/",
+                                                     initialdir=WWB_FOLDER_PATH,
                                                      filetypes=[(".inv files", "*.inv")])
 
         self.__chosen_WWB.configure(text=f"Selected file: {self.__WWB_path}")
 
     def convert(self):
         main.main(self.__WWB_path, self.__WSM_path)
+        messagebox.showinfo(title="Conversion successful", message=f"File converted successfully.\n"
+                                                                   f"Converted file was created in: \n\n"
+                                                                   f"{OUTPUT_FOLDER_PATH}", )
+        self.__mainwindow.destroy()

@@ -2,7 +2,11 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 
-from modules.paths import *
+try:
+    from modules.paths import WSM_FOLDER_PATH, WWB_FOLDER_PATH, OUTPUT_FOLDER_PATH
+except OSError:
+    messagebox.showinfo(title="Unsupported OS", message=f"The current operating system is not supported")
+
 import main
 
 
@@ -62,7 +66,7 @@ class GUI:
         self.__chosen_WWB.configure(text=f"Selected file: {self.__WWB_path}")
 
     def convert(self):
-        main.main(self.__WWB_path, self.__WSM_path)
+        main.main(self.__WWB_path, self.__WSM_path, WSM_FOLDER_PATH)
         messagebox.showinfo(title="Conversion successful", message=f"File converted successfully.\n"
                                                                    f"Converted file was created in: \n\n"
                                                                    f"{OUTPUT_FOLDER_PATH}", )
